@@ -1,0 +1,441 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+:root{
+    --bg-color: #A0D8B3;
+    --btn-color: #186F65;
+    --hue: 223;
+	--bg: hsl(var(--hue),90%,90%);
+	--fg: hsl(var(--hue),90%,10%);
+	--trans-dur: 0.3s;
+	
+}
+*{
+    padding: 0;
+    margin: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
+body{
+    min-height: 100%;
+    background-color: var(--bg-color);
+    overflow: hidden;
+}
+.loading_screen{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+	color: var(--fg);
+	font: 1em/1.5 sans-serif;
+	height: 100vh;
+	display: grid;
+	place-items: center;
+    opacity: 1;
+	transition:
+        opacity 1s,
+		background-color var(--trans-dur),
+		color var(--trans-dur);
+    z-index: 5;
+    font-size: calc(16px + (20 - 16) * (100vw - 320px) / (1280 - 320));
+}
+.loading_name{
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    text-align: center;
+    position: absolute;
+    top: 65%;
+    color: gray;
+}
+.smiley {
+	width: 8em;
+	height: 8em;
+}
+.smiley__eye1,
+.smiley__eye2,
+.smiley__mouth1,
+.smiley__mouth2 {
+	animation: eye1 3s ease-in-out infinite;
+}
+.smiley__eye1,
+.smiley__eye2 {
+	transform-origin: 64px 64px;
+}
+.smiley__eye2 {
+	animation-name: eye2;
+}
+.smiley__mouth1 {
+	animation-name: mouth1;
+}
+.smiley__mouth2 {
+	animation-name: mouth2;
+	visibility: hidden;
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: hsl(var(--hue),90%,10%);
+		--fg: hsl(var(--hue),90%,90%);
+	}
+}
+
+/* Animations */
+@keyframes eye1 {
+	from {
+		transform: rotate(-260deg) translate(0,-56px);
+	}
+	50%,
+	60% {
+		animation-timing-function: cubic-bezier(0.17,0,0.58,1);
+		transform: rotate(-40deg) translate(0,-56px) scale(1);
+	}
+	to {
+		transform: rotate(225deg) translate(0,-56px) scale(0.35);
+	}
+}
+@keyframes eye2 {
+	from {
+		transform: rotate(-260deg) translate(0,-56px);
+	}
+	50% {
+		transform: rotate(40deg) translate(0,-56px) rotate(-40deg) scale(1);
+	}
+	52.5% {
+		transform: rotate(40deg) translate(0,-56px) rotate(-40deg) scale(1,0);
+	}
+	55%,
+	70% {
+		animation-timing-function: cubic-bezier(0,0,0.28,1);
+		transform: rotate(40deg) translate(0,-56px) rotate(-40deg) scale(1);
+	}
+	to {
+		transform: rotate(150deg) translate(0,-56px) scale(0.4);
+	}
+}
+@keyframes eyeBlink {
+	from,
+	25%,
+	75%,
+	to {
+		transform: scaleY(1);
+	}
+	50% {
+		transform: scaleY(0);
+	}
+}
+@keyframes mouth1 {
+	from {
+		animation-timing-function: ease-in;
+		stroke-dasharray: 0 351.86;
+		stroke-dashoffset: 0;
+	}
+	25% {
+		animation-timing-function: ease-out;
+		stroke-dasharray: 175.93 351.86;
+		stroke-dashoffset: 0;
+	}
+	50% {
+		animation-timing-function: steps(1,start);
+		stroke-dasharray: 175.93 351.86;
+		stroke-dashoffset: -175.93;
+		visibility: visible;
+	}
+	75%,
+	to {
+		visibility: hidden;
+	}
+}
+@keyframes mouth2 {
+	from {
+		animation-timing-function: steps(1,end);
+		visibility: hidden;
+	}
+	50% {
+		animation-timing-function: ease-in-out;
+		visibility: visible;
+		stroke-dashoffset: 0;
+	}
+	to {
+		stroke-dashoffset: -351.86;
+	}
+}
+.img-container{
+    position: absolute;
+    overflow: hidden;
+}
+.img-container img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.fru1{
+    top: 5%;
+    right: 13%;
+}
+.fru2{
+    transform: rotate(25deg);
+    top: 12%;
+    left: 20%;
+}
+.fru3{
+    transform: rotate(-25deg);
+    bottom: 45%;
+    right: 5%;
+}
+.fru4{
+    transform: rotate(25deg);
+    bottom: 35%;
+    left: 8%;
+}
+.fru5{
+    transform: rotate(25deg);
+    top: 65%;
+    right: 22%;
+}
+.fru6{
+    transform: rotate(-25deg);
+    top: 70%;
+    left: 20%;
+}
+.top_sensor{
+    margin: 50px auto;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: aliceblue;
+    text-transform: capitalize;
+    width: fit-content;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.backBtn{
+    color: black;
+    position: absolute;
+    top: 5px ; left: 20px;
+    font-size: 1.5rem;
+    padding: 8px;
+    transition: .2s;
+}
+.backBtn:hover{
+    color: aliceblue;
+    transform: translateX(-3px);
+}
+.middle_sensor{
+    text-align: center;
+    margin: 3rem auto;
+    width: fit-content;
+    padding: 50px 55px;
+    background-color: aliceblue;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.middle_sensor img{
+    margin: 0 auto;
+    height: 100px;
+}
+.middle_sensor h2{
+    margin-top: 10px;
+    text-transform: capitalize;
+}
+.middle_sensor .input-data-sensor{
+    margin-top: 30px;
+    position: relative;
+}
+.middle_sensor .input-data-sensor input{
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    text-align: center;
+}
+.input-data-sensor .error {
+    position: absolute;
+    bottom: -26.5px;
+    left: 50%;
+    transform: translate(-50%);
+    font-weight: 500;
+    font-size: 1.05rem;
+    background-color: var(--error-color);
+    color: red;
+    width: 95%;
+    padding: 3px;
+    transition: opacity 0.5s, transform 0.5s, height 0.5s;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.bot_sensor{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bot_sensor button{
+    padding: 8px 20px;
+    border-radius: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: 3px solid transparent;
+    color: gray;
+    font-weight: 600;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    opacity: .8;
+    transition: .3s;
+}
+.bot_sensor button:hover{
+    color: var(--btn-color);
+    opacity: 1;
+    transform: scale(1.05);
+    border-color: black;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    text-shadow: 0 0 1px;
+}
+.bot_sensor .menu_page{
+    color: black;
+    padding: 5px;
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    opacity: 0.6;
+    transition: .2s;
+}
+.bot_sensor .menu_page:hover{
+    color: white;
+    opacity: .9;
+}
+@media screen and (max-width: 1050px) {
+    .fru1{
+        top: 2%;
+        right: 13%;
+    }
+    .fru2{
+        transform: rotate(25deg);
+        top: 7%;
+        left: 8%;
+    }
+    .fru3{
+        transform: rotate(-25deg);
+        bottom: 50%;
+        right: 5%;
+    }
+    .fru4{
+        transform: rotate(25deg);
+        bottom: 45%;
+        left: 8%;
+    }
+    .fru5{
+        transform: rotate(25deg);
+        top: 65%;
+        right: 20%;
+    }
+    .fru6{
+        transform: rotate(-25deg);
+        top: 70%;
+        left: 20%;
+    }
+}
+@media screen and (max-width: 760px){
+    .fru1{
+        top: 4%;
+        right: 1%;
+    }
+    .fru2{
+        transform: rotate(25deg);
+        top: 8%;
+        left: 2%;
+    }
+    .fru3{
+        transform: rotate(-25deg);
+        bottom: 45%;
+        right: 1%;
+    }
+    .fru4{
+        transform: rotate(25deg);
+        bottom: 42%;
+        left: -7%;
+    }
+    .fru5{
+        transform: rotate(25deg);
+        top: 70%;
+        right: -5%;
+    }
+    .fru6{
+        transform: rotate(-25deg);
+        top: 80%;
+        left: 5%;
+    }
+}
+
+@media screen and (max-width: 560px){
+    .fru1{
+        top: 2%;
+        right: -5%;
+    }
+    .fru2{
+        transform: rotate(25deg);
+        top: 4%;
+        left: -8%;
+    }
+    .fru3{
+        transform: rotate(-25deg);
+        bottom: 50%;
+        right: -6%;
+    }
+    .fru4{
+        transform: rotate(25deg);
+        bottom: 45%;
+        left: -8%;
+    }
+    .fru5{
+        transform: rotate(25deg);
+        top: 85%;
+        right: 0%;
+    }
+    .fru6{
+        transform: rotate(-25deg);
+        top: 80%;
+        left: 5%;
+    }
+}
+@media screen and (max-width: 420px){
+    .middle_sensor{
+        padding: 30px 40px;
+    }
+    .img-container{
+        width: 25%;
+    }
+    .fru1{
+        top: 2%;
+        right: -9%;
+    }
+    .fru2{
+        transform: rotate(25deg);
+        top: 4%;
+        left: -10%;
+    }
+    .fru3{
+        transform: rotate(-25deg);
+        bottom: 10%;
+        right: -6%;
+    }
+    .fru4{
+        transform: rotate(25deg);
+        bottom: 15%;
+        left: -8%;
+    }
+    .fru5{
+        transform: rotate(25deg);
+        top: 95%;
+        right: 0%;
+    }
+    .fru6{
+        transform: rotate(-25deg);
+        top: 80%;
+        left: 5%;
+    }
+}
